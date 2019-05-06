@@ -8,6 +8,6 @@ s.homepage     = "https://github.com/GeLeis/GLFlowLayout"
 s.source       = { :git => "https://github.com/GeLeis/GLFlowLayout.git", :tag => "#{s.version}" }
 s.source_files = "GLFlowLayout/**/*"
 s.requires_arc = true
-s.platform     = :ios, "9.0"
+s.ios.deployment_target = "9.0"
 s.author             = { "869313996@qq.com" => "gelei@anve.com" }
 end
