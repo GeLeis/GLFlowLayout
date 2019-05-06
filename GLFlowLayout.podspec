@@ -29,14 +29,5 @@ TODO: Add long description of the pod here.
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '9.0'
-
-  s.source_files = 'GLFlowLayout/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'GLFlowLayout' => ['GLFlowLayout/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.source_files = 'GLFlowLayout/**/*'
 end
