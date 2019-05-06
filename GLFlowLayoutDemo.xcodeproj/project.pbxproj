@@ -17,7 +17,6 @@
 		283AAA2322801F8D00BE47BF /* SectionHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 283AAA2222801F8D00BE47BF /* SectionHeaderReusableView.m */; };
 		283AAA2622801FA000BE47BF /* SectionFooterReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 283AAA2522801FA000BE47BF /* SectionFooterReusableView.m */; };
 		283AAA29228020D800BE47BF /* GLSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 283AAA28228020D800BE47BF /* GLSectionModel.m */; };
-		283AAA3722803E9E00BE47BF /* GLFlowLayout.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 283AAA3622803E9E00BE47BF /* GLFlowLayout.podspec */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +38,6 @@
 		283AAA2522801FA000BE47BF /* SectionFooterReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SectionFooterReusableView.m; sourceTree = "<group>"; };
 		283AAA27228020D800BE47BF /* GLSectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLSectionModel.h; sourceTree = "<group>"; };
 		283AAA28228020D800BE47BF /* GLSectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLSectionModel.m; sourceTree = "<group>"; };
-		283AAA3622803E9E00BE47BF /* GLFlowLayout.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GLFlowLayout.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +54,6 @@
 		283AA9FB22801D3900BE47BF = {
 			isa = PBXGroup;
 			children = (
-				283AAA3622803E9E00BE47BF /* GLFlowLayout.podspec */,
 				283AAA1D22801E2600BE47BF /* GLFlowLayout */,
 				283AAA0622801D3900BE47BF /* GLFlowLayoutDemo */,
 				283AAA0522801D3900BE47BF /* Products */,
@@ -160,7 +157,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				283AAA1422801D3B00BE47BF /* LaunchScreen.storyboard in Resources */,
-				283AAA3722803E9E00BE47BF /* GLFlowLayout.podspec in Resources */,
 				283AAA1122801D3B00BE47BF /* Assets.xcassets in Resources */,
 				283AAA0F22801D3900BE47BF /* Main.storyboard in Resources */,
 			);
