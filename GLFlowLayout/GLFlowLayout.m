@@ -17,12 +17,14 @@
 @property (nonatomic, assign) NSInteger maxColumn;
 /// 存放每一个item的布局属性
 @property (nonatomic, strong) NSMutableArray<UICollectionViewLayoutAttributes *> *layoutAttributes;
+/** 滚动的范围,避免重复计算 */
+@property (nonatomic, assign) CGSize contentSize;
 @end
 
 @implementation GLFlowLayout
 
 - (void)prepareLayout {
-    [super prepareLayout];
+    self.contentSize = CGSizeZero;
     [self.maxYDics removeAllObjects];
     [self.maxYDic removeAllObjects];
     [self.layoutAttributes removeAllObjects];
@@ -38,8 +40,13 @@
                 [self.maxYDic setValue:@(currentMaxY) forKey:[NSString stringWithFormat:@"%d",i]];
             }
         }
+        CGFloat decorationStartY = [self currentMaxY];
+        //        NSInteger decorationIndex = self.layoutAttributes.count;
+        
+        NSIndexPath *pathOfSection = [NSIndexPath indexPathForRow:0 inSection:section];
+        
         //sectionHeader 及sectionInset.top
-        UICollectionViewLayoutAttributes *headerLayout = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader atIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+        UICollectionViewLayoutAttributes *headerLayout = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader atIndexPath:pathOfSection];
         if (headerLayout) {
             [self.layoutAttributes addObject:headerLayout];
         }
@@ -49,12 +56,27 @@
             [self.layoutAttributes addObject:itemLayout];
         }
         //sectionFooter及sectionInset.bottom
-        UICollectionViewLayoutAttributes *footerLayout = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter atIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+        UICollectionViewLayoutAttributes *footerLayout = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter atIndexPath:pathOfSection];
         if (footerLayout) {
             [self.layoutAttributes addObject:footerLayout];
         }
         [self.maxYDics addObject:[self.maxYDic copy]];
+        
+        CGFloat decorationEndY = [self currentMaxY];
+        if ([self.delegate respondsToSelector:@selector(collectionView:layoutAttributesForDecorationViewAtIndexPath:)]) {
+            NSString *elementKind = [self.delegate collectionView:self.collectionView layoutAttributesForDecorationViewAtIndexPath:pathOfSection];
+            if (elementKind) {
+                UICollectionViewLayoutAttributes *decorationLayout = [self initialLayoutAttributesForAppearingDecorationElementOfKind:elementKind atIndexPath:pathOfSection];
+                if (decorationLayout) {
+                    //不知道为什么这里会有
+                    decorationLayout.frame = CGRectMake(0, decorationStartY, self.collectionView.frame.size.width, decorationEndY - decorationStartY);
+                    decorationLayout.zIndex = -1;
+                    [self.layoutAttributes addObject:decorationLayout];
+                }
+            }
+        }
     }
+    self.contentSize = CGSizeMake(0, [self currentMaxY]);
 }
 
 - (CGFloat) currentMaxY {
@@ -95,7 +117,10 @@
 
 //设置collectionView滚动区域
 - (CGSize)collectionViewContentSize {
-    return CGSizeMake(0, [self currentMaxY]);
+    if (self.contentSize.height > 0) {
+        return self.contentSize;
+    }
+    return CGSizeMake(0,[self currentMaxY]);
 }
 
 //cell布局
@@ -176,13 +201,17 @@
     return nil;
 }
 
+- (UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingDecorationElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)decorationIndexPath {
+    return [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:elementKind withIndexPath:decorationIndexPath];
+}
+
 - (nullable NSArray<__kindof UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
     return self.layoutAttributes;
 }
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
-    CGRect oldBounds = self.collectionView.bounds;
-    if (CGRectGetWidth(newBounds) != CGRectGetWidth(oldBounds)) {
+    //宽度发生变化,一般不会
+    if (CGRectGetWidth(newBounds) != CGRectGetWidth(self.collectionView.bounds)) {
         return YES;
     }
     return NO;
