@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "GLCollectionLayout"
-  spec.version      = "1.0.4"
+  spec.version      = "1.0.5"
   spec.summary      = "GLCollectionFlowLayout自定义瀑布流,支持多组section"
 
   # This description is used to generate tags and improve search results.
@@ -25,7 +25,8 @@ Pod::Spec.new do |spec|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = <<-DESC
-                   GLCollectionFlowLayout自定义瀑布流,支持多组section
+                GLCollectionFlowLayout自定义瀑布流,支持多组section
+                    DESC
 
   spec.homepage     = "https://github.com/GeLeis/GLFlowLayout"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
