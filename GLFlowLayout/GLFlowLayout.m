@@ -31,52 +31,57 @@
     
     //计算所有item的属性,目前默认为
     for (NSInteger section = 0; section < self.collectionView.numberOfSections; section++) {
-        CGFloat currentMaxY = [self currentMaxY];
-        self.maxYDic = [NSMutableDictionary dictionary];
-        self.maxColumn = 1;
-        if ([self.delegate respondsToSelector:@selector(collectionView:layout:maxColumnInSection:)]) {
-            self.maxColumn = [self.delegate collectionView:self.collectionView layout:self maxColumnInSection:section];
-            for (int i = 0; i < self.maxColumn; i++) {
-                [self.maxYDic setValue:@(currentMaxY) forKey:[NSString stringWithFormat:@"%d",i]];
+        @autoreleasepool {
+            CGFloat currentMaxY = [self currentMaxY];
+            self.maxYDic = [NSMutableDictionary dictionary];
+            self.maxColumn = 1;
+            if ([self.delegate respondsToSelector:@selector(collectionView:layout:maxColumnInSection:)]) {
+                self.maxColumn = [self.delegate collectionView:self.collectionView layout:self maxColumnInSection:section];
+                for (int i = 0; i < self.maxColumn; i++) {
+                    [self.maxYDic setValue:@(currentMaxY) forKey:[NSString stringWithFormat:@"%d",i]];
+                }
             }
-        }
-        CGFloat decorationStartY = [self currentMaxY];
-        //        NSInteger decorationIndex = self.layoutAttributes.count;
-        
-        NSIndexPath *pathOfSection = [NSIndexPath indexPathForRow:0 inSection:section];
-        
-        //sectionHeader 及sectionInset.top
-        UICollectionViewLayoutAttributes *headerLayout = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader atIndexPath:pathOfSection];
-        if (headerLayout) {
-            [self.layoutAttributes addObject:headerLayout];
-        }
-        NSInteger rows = [self.collectionView numberOfItemsInSection:section];
-        for (NSInteger row = 0; row < rows; row++) {
-            UICollectionViewLayoutAttributes *itemLayout = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:row inSection:section]];
-            [self.layoutAttributes addObject:itemLayout];
-        }
-        //sectionFooter及sectionInset.bottom
-        UICollectionViewLayoutAttributes *footerLayout = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter atIndexPath:pathOfSection];
-        if (footerLayout) {
-            [self.layoutAttributes addObject:footerLayout];
-        }
-        [self.maxYDics addObject:[self.maxYDic copy]];
-        
-        CGFloat decorationEndY = [self currentMaxY];
-        if ([self.delegate respondsToSelector:@selector(collectionView:layoutAttributesForDecorationViewAtIndexPath:)]) {
-            NSString *elementKind = [self.delegate collectionView:self.collectionView layoutAttributesForDecorationViewAtIndexPath:pathOfSection];
-            if (elementKind) {
-                UICollectionViewLayoutAttributes *decorationLayout = [self initialLayoutAttributesForAppearingDecorationElementOfKind:elementKind atIndexPath:pathOfSection];
-                if (decorationLayout) {
-                    //不知道为什么这里会有
-                    decorationLayout.frame = CGRectMake(0, decorationStartY, self.collectionView.frame.size.width, decorationEndY - decorationStartY);
-                    decorationLayout.zIndex = -1;
-                    [self.layoutAttributes addObject:decorationLayout];
+            CGFloat decorationStartY = [self currentMaxY];
+            //插在一组section的开始
+            NSInteger decorationIndex = self.layoutAttributes.count;
+            
+            NSIndexPath *pathOfSection = [NSIndexPath indexPathForRow:0 inSection:section];
+            
+            //sectionHeader 及sectionInset.top
+            UICollectionViewLayoutAttributes *headerLayout = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader atIndexPath:pathOfSection];
+            if (headerLayout) {
+                [self.layoutAttributes addObject:headerLayout];
+            }
+            NSInteger rows = [self.collectionView numberOfItemsInSection:section];
+            for (NSInteger row = 0; row < rows; row++) {
+                UICollectionViewLayoutAttributes *itemLayout = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:row inSection:section]];
+                if (itemLayout) {
+                    [self.layoutAttributes addObject:itemLayout];
+                }
+            }
+            //sectionFooter及sectionInset.bottom
+            UICollectionViewLayoutAttributes *footerLayout = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter atIndexPath:pathOfSection];
+            if (footerLayout) {
+                [self.layoutAttributes addObject:footerLayout];
+            }
+            [self.maxYDics addObject:[self.maxYDic copy]];
+            
+            CGFloat decorationEndY = [self currentMaxY];
+            if ([self.delegate respondsToSelector:@selector(collectionView:layoutAttributesForDecorationViewAtIndexPath:)]) {
+                NSString *elementKind = [self.delegate collectionView:self.collectionView layoutAttributesForDecorationViewAtIndexPath:pathOfSection];
+                if (elementKind) {
+                    UICollectionViewLayoutAttributes *decorationLayout = [self initialLayoutAttributesForAppearingDecorationElementOfKind:elementKind atIndexPath:pathOfSection];
+                    if (decorationLayout) {
+                        //不知道为什么这里会有
+                        decorationLayout.frame = CGRectMake(0, decorationStartY, self.collectionView.frame.size.width, decorationEndY - decorationStartY);
+                        decorationLayout.zIndex = -1;
+                        [self.layoutAttributes insertObject:decorationLayout atIndex:decorationIndex];
+                    }
                 }
             }
         }
     }
-    self.contentSize = CGSizeMake(0, [self currentMaxY]);
+    self.contentSize = CGSizeMake(self.collectionView.frame.size.width, [self currentMaxY]);
 }
 
 - (CGFloat) currentMaxY {
@@ -117,10 +122,13 @@
 
 //设置collectionView滚动区域
 - (CGSize)collectionViewContentSize {
-    if (self.contentSize.height > 0) {
-        return self.contentSize;
+    if (self.contentSize.height == 0.f) {
+        self.contentSize = CGSizeMake(self.collectionView.frame.size.width,[self currentMaxY]);
     }
-    return CGSizeMake(0,[self currentMaxY]);
+    if ([self.delegate respondsToSelector:@selector(collectionView:contentViewContentSize:)]) {
+        [self.delegate collectionView:self.collectionView contentViewContentSize:self.contentSize];
+    }
+    return self.contentSize;
 }
 
 //cell布局
@@ -206,6 +214,15 @@
 }
 
 - (nullable NSArray<__kindof UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
+    NSMutableArray *showLayoutAttributes = [NSMutableArray array];
+    for (UICollectionViewLayoutAttributes *layoutAttri in self.layoutAttributes) {
+        if (CGRectIntersectsRect(rect, layoutAttri.frame)) {
+            [showLayoutAttributes addObject:layoutAttri];
+        }
+    }
+    if (showLayoutAttributes.count > 0) {
+        return showLayoutAttributes;
+    }
     return self.layoutAttributes;
 }
 

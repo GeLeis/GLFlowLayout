@@ -14,7 +14,7 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout maxColumnInSection:(NSInteger)section;
 //装饰view elementKind
 - (NSString *)collectionView:(UICollectionView *)collectionView layoutAttributesForDecorationViewAtIndexPath:(NSIndexPath *)indexPath;
-
+- (void)collectionView:(UICollectionView *)collectionView contentViewContentSize:(CGSize)contentSize;
 @end
 
 @interface GLFlowLayout : UICollectionViewLayout

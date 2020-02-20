@@ -114,11 +114,17 @@
     GLSectionModel *model1 = [[GLSectionModel alloc] init];
     model1.headerHeight = 10;
     model1.footerHeight = 20;
-    GLRowModel *row = [[GLRowModel alloc] init];
-    row.itemSize = CGSizeMake(SCREEN_WIDTH, 100);
-    row.cellIdentify = NSStringFromClass(self.class);
-    row.data = @1;
-    model1.rows = @[row,row];
+    GLRowModel *row1 = [[GLRowModel alloc] init];
+    row1.itemSize = CGSizeMake(SCREEN_WIDTH, 100);
+    row1.cellIdentify = NSStringFromClass(self.class);
+    row1.data = @1;
+    
+    GLRowModel *row2 = [[GLRowModel alloc] init];
+    row2.itemSize = CGSizeMake(SCREEN_WIDTH, 100);
+    row2.cellIdentify = NSStringFromClass(self.class);
+    row2.data = @1;
+    
+    model1.rows = @[row1,row2];
     model1.maxColumn = 1;
     model1.sectionInsets = UIEdgeInsetsMake(10, 10, 10, 10);
     model1.lineSpacing = 20;
