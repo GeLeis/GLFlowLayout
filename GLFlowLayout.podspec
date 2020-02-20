@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name         = "GLFlowLayout"
-s.version      = "1.0.1"
+s.version      = "1.0.2"
 s.license      = "MIT"
 s.summary      = "自定义瀑布流,支持多组section"
 
