@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "GLCollectionLayout"
-  spec.version      = "1.0.6"
+  spec.version      = "1.0.7"
   spec.summary      = "GLCollectionFlowLayout自定义瀑布流,支持多组section"
 
   # This description is used to generate tags and improve search results.

@@ -6,9 +6,9 @@
 //  Copyright © 2019 冒险元素. All rights reserved.
 //
 
-#import "GLFlowLayout.h"
+#import "GLCollectionFlowLayout.h"
 
-@interface GLFlowLayout()
+@interface GLCollectionFlowLayout()
 /** 每一组section的maxYDic的集合<##> */
 @property (nonatomic, strong) NSMutableArray<NSMutableDictionary<NSString *, NSNumber *> *> *maxYDics;
 ///每一组section这个字典用来存储每一列item的高度
@@ -21,7 +21,7 @@
 @property (nonatomic, assign) CGSize contentSize;
 @end
 
-@implementation GLFlowLayout
+@implementation GLCollectionFlowLayout
 
 - (void)prepareLayout {
     self.contentSize = CGSizeZero;

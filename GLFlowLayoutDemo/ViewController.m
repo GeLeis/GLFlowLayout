@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "GLFlowLayout.h"
+#import "GLCollectionFlowLayout.h"
 #import "SectionHeaderReusableView.h"
 #import "SectionFooterReusableView.h"
 #import "GLSectionModel.h"
@@ -15,7 +15,7 @@
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define kRandomColor [UIColor colorWithRed:(arc4random()%256)/256.f green:(arc4random()%256)/256.f blue:(arc4random()%256)/256.f alpha:1.0f]
 
-@interface ViewController ()<UICollectionViewDataSource, GLFlowLayoutDelegate>
+@interface ViewController ()<UICollectionViewDataSource, GLCollectionFlowLayoutDelegate>
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray <GLSectionModel *> *models;
 @end
@@ -94,7 +94,7 @@
 
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
-        GLFlowLayout *layout = [[GLFlowLayout alloc] init];
+        GLCollectionFlowLayout *layout = [[GLCollectionFlowLayout alloc] init];
         layout.delegate = self;
         _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
         _collectionView.showsHorizontalScrollIndicator = NO;

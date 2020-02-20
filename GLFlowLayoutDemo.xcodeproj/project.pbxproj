@@ -13,7 +13,7 @@
 		283AAA1122801D3B00BE47BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 283AAA1022801D3B00BE47BF /* Assets.xcassets */; };
 		283AAA1422801D3B00BE47BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 283AAA1222801D3B00BE47BF /* LaunchScreen.storyboard */; };
 		283AAA1722801D3B00BE47BF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 283AAA1622801D3B00BE47BF /* main.m */; };
-		283AAA2022801E6500BE47BF /* GLFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 283AAA1F22801E6500BE47BF /* GLFlowLayout.m */; };
+		283AAA2022801E6500BE47BF /* GLCollectionFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 283AAA1F22801E6500BE47BF /* GLCollectionFlowLayout.m */; };
 		283AAA2322801F8D00BE47BF /* SectionHeaderReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 283AAA2222801F8D00BE47BF /* SectionHeaderReusableView.m */; };
 		283AAA2622801FA000BE47BF /* SectionFooterReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 283AAA2522801FA000BE47BF /* SectionFooterReusableView.m */; };
 		283AAA29228020D800BE47BF /* GLSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 283AAA28228020D800BE47BF /* GLSectionModel.m */; };
@@ -30,8 +30,8 @@
 		283AAA1322801D3B00BE47BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		283AAA1522801D3B00BE47BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		283AAA1622801D3B00BE47BF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		283AAA1E22801E6500BE47BF /* GLFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLFlowLayout.h; sourceTree = "<group>"; };
-		283AAA1F22801E6500BE47BF /* GLFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLFlowLayout.m; sourceTree = "<group>"; };
+		283AAA1E22801E6500BE47BF /* GLCollectionFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLCollectionFlowLayout.h; sourceTree = "<group>"; };
+		283AAA1F22801E6500BE47BF /* GLCollectionFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLCollectionFlowLayout.m; sourceTree = "<group>"; };
 		283AAA2122801F8D00BE47BF /* SectionHeaderReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SectionHeaderReusableView.h; sourceTree = "<group>"; };
 		283AAA2222801F8D00BE47BF /* SectionHeaderReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SectionHeaderReusableView.m; sourceTree = "<group>"; };
 		283AAA2422801FA000BE47BF /* SectionFooterReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SectionFooterReusableView.h; sourceTree = "<group>"; };
@@ -93,8 +93,8 @@
 		283AAA1D22801E2600BE47BF /* GLFlowLayout */ = {
 			isa = PBXGroup;
 			children = (
-				283AAA1E22801E6500BE47BF /* GLFlowLayout.h */,
-				283AAA1F22801E6500BE47BF /* GLFlowLayout.m */,
+				283AAA1E22801E6500BE47BF /* GLCollectionFlowLayout.h */,
+				283AAA1F22801E6500BE47BF /* GLCollectionFlowLayout.m */,
 			);
 			path = GLFlowLayout;
 			sourceTree = "<group>";
@@ -175,7 +175,7 @@
 				283AAA0922801D3900BE47BF /* AppDelegate.m in Sources */,
 				283AAA2622801FA000BE47BF /* SectionFooterReusableView.m in Sources */,
 				283AAA29228020D800BE47BF /* GLSectionModel.m in Sources */,
-				283AAA2022801E6500BE47BF /* GLFlowLayout.m in Sources */,
+				283AAA2022801E6500BE47BF /* GLCollectionFlowLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

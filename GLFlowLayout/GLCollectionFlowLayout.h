@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol GLFlowLayoutDelegate <UICollectionViewDelegateFlowLayout>
+@protocol GLCollectionFlowLayoutDelegate <UICollectionViewDelegateFlowLayout>
 @optional
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout maxColumnInSection:(NSInteger)section;
@@ -17,6 +17,6 @@
 - (void)collectionView:(UICollectionView *)collectionView contentViewContentSize:(CGSize)contentSize;
 @end
 
-@interface GLFlowLayout : UICollectionViewLayout
-@property (nonatomic, strong) id<GLFlowLayoutDelegate> delegate;
+@interface GLCollectionFlowLayout : UICollectionViewLayout
+@property (nonatomic, strong) id<GLCollectionFlowLayoutDelegate> delegate;
 @end
