@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
-s.name         = "GLFlowLayout"
-s.version      = "1.0.2"
+s.name         = "GLCollectionFlowLayout"
+s.version      = "1.0.3"
 s.license      = "MIT"
-s.summary      = "自定义瀑布流,支持多组section"
+s.summary      = "GLCollectionFlowLayout自定义瀑布流,支持多组section"
 
 s.homepage     = "https://github.com/GeLeis/GLFlowLayout"
 s.source       = { :git => "https://github.com/GeLeis/GLFlowLayout.git", :tag => "#{s.version}" }
